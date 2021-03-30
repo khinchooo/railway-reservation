@@ -54,5 +54,5 @@ def Register(request):
     else:
         return HttpResponse(template.render({}, request))
 
-def home(request):
+def Home(request):
     return render(request,'booking/home.html')
