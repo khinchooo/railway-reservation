@@ -20,8 +20,10 @@ def Login(request):
                 if user.is_active:
                     login(request, user)
                     return redirect('home/', request)
-            return HttpResponse('Invalid username or password')
-        return HttpResponse('Not Complete Data')
+            form.add_error(None, 'Invalid username or password')
+            return HttpResponse(template.render({'form': form}, request))
+        form.add_error(None, 'Incomplete username or password data')
+        return HttpResponse(template.render({'form': form}, request))
     else:
         return HttpResponse(template.render({}, request))
 
@@ -45,11 +47,11 @@ def Register(request):
             user.set_password(password)
             user.save()
             user= authenticate(username = username, password = password)
-            if user is not None:
-                if user.is_active:
-                    login(request, user)
-                    return render(request,'booking/home.html')
-            return HttpResponse('valid')
+            
+            if user.is_active:
+                login(request, user)
+                return render(request,'booking/home.html')
+        form.add_error(None, 'This is field incomplete data')
         return HttpResponse(template.render({'form':form},request))
     else:
         return HttpResponse(template.render({}, request))
