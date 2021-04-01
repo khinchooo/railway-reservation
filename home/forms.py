@@ -7,9 +7,10 @@ class UserLogin(forms.Form):
     password = forms.CharField(max_length=16, widget=forms.PasswordInput())
 
 class UserRegister(forms.ModelForm):
-    number=forms.CharField(required=True)
+    email = forms.EmailField(required=True)
+    number = forms.CharField(required=True)
     class Meta:
-        model=User
+        model = User
         fields=['username','password','email','number']
 
     def LoginButton(self, commit=True):

@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.template import loader
 from django.http import HttpResponse
+from django.contrib import auth
 from .forms import UserLogin, UserRegister
 from django.contrib.auth import authenticate,login
 from booking.models import Member
@@ -58,3 +59,7 @@ def Register(request):
 
 def Home(request):
     return render(request,'booking/home.html')
+
+def logout(request):
+    auth.logout(request)
+    return redirect("http://127.0.0.1:8000/")
