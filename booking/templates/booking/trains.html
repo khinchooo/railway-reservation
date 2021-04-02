@@ -8,29 +8,32 @@
     <form class="tform" action="book1/" method="POST">
         {%csrf_token%}
         <div class="hd">
-            <input type="text" value="{{start_station}}" name="start" readonly>----<input type="text" value="{{end_station}}" name="des" readonly><br/>
+            <input type="text" value="{{start_station}}" name="start_station" readonly>--<input type="text" value="{{end_station}}" name="end_station" readonly><br/>
+            <b>DATE OF JOURNEY:</b><input type="text" placeholder="DD/MM/YYYY" id="dt" name="date"><br/>
         </div>
     <h1 id="123"></h1>
-        <span hidden id="od">{{o}}</span>
+
   	<table style="margin-left:50px;font-size:20px;color:black;" class="table-striped table-bordered table-hover">
         <tr class="sty" style="color:black;padding:10px;">
            <th style="padding:10px;">Train Number</th>
             <th style="padding:10px;">Arrival Station</th>
+            <th style="padding:10px;">Departure Time</th>
             <th style="padding:10px;">Arrival Time</th>
-            <th style="padding:10px;">Select Class</th>
+            {% comment %} <th style="padding:10px;">Select Class</th>
             <th style="padding:10px;">Availibility</th>
             <th style="padding:10px;">Fare/Seats</th>
             <th style="padding:10px;">No of Seats</th>
-            <th style="padding:10px;">Book</th>
+            <th style="padding:10px;">Book</th> {% endcomment %}
         </tr>
 
     {% for i in data %}
         <tr>
-            <td style="padding:15px;"><h5 ><b>{{i.train_no}}</b></h5></td>
+            <td style="padding:15px;"><h5 ><b>{{i.train_id}}</b></h5></td>
              <td style="padding:15px;"><h5><b>{{i.station_id}}</b></h5></td>
+             <td style="padding:15px;"><h5><b>{{i.departure_time}}</b></h5></td>
             <td style="padding:15px;"><h5><b>{{i.arrival_time}}</b></h5></td>
-            <td><h6>
-                <select id="{{i.train_no}}">
+            {% comment %} <td><h6>
+                <select id="{{i.train_id}}" name="cls{{i.train_id}}">
                     <option value="NONE">NONE</option>
                     <option value="AC">AC</option>
                     <option value="2S">2S</option>
@@ -39,11 +42,11 @@
                 </select>
             </h6></td>
             <td ><h6 id="{{i.tno}}1"></h6></td>
-            <td><input id="{{i.tno}}p1" type="text" name="price{{i.tno}}" value="" readonly > </h6></td>
+            <td><input id="{{i.tno}}" type="text" name="price{{i.tno}}" value="" readonly > </h6></td>
             <td><input type="number" id="{{i.tno}}-2" name="nos{{i.tno}}"/></td>
             <td>
                 <button type="submit" class="btn btn-success"  value="{{i.tno}}" name="bk">Book Seat</button>
-            </td>
+            </td> {% endcomment %}
         </tr>
 
     {% endfor %}
@@ -51,4 +54,4 @@
 
         <br/><br/><br/>
         </form>
-    {%endblock%}
+{%endblock%}
