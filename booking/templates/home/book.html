@@ -1,0 +1,51 @@
+{% extends 'booking/bases.html' %}
+
+{% block body %}
+<div class="container">
+    <h2>Booking Information</h2>
+    <form class="" action="/home/reserve" method="POST">
+        {% csrf_token %}
+        <table class="table table-bordered">
+            <tbody>
+                <tr>
+                    <th>Train Name:</th>
+                    <td>
+                        {{data.train.train_name}}
+                        <input type="hidden" name="train_name" value="{{data.train.train_name}}">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Train No:</th>
+                    <td>
+                        {{data.train.train_id}}
+                        <input type="hidden" name="train_id" value="{{data.train.train_id}}">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Start Station:</th>
+                    <td>
+                        {{data.route.start_station}}
+                        <input type="hidden" name="start_station" value="{{data.route.start_station}}">
+                    </td>
+                </tr>
+                <tr>
+                    <th>End Station:</th>
+                    <td>
+                        {{data.route.end_station}}
+                        <input type="hidden" name="end_station" value="{{data.route.end_station}}">
+                    </td>
+                </tr>
+                <tr>
+                    <th>No of Seats:</th>
+                    <td><input type="number" name="no_of_seats" value="{{no_of_seats}}"></td>
+                </tr>
+                <tr>
+                    <th>Journey Date:</th>
+                    <td><input type="text" name="journey_date" value="{{journey_date|date:'d/m/Y'}}"></td>
+                </tr>
+            </tbody>
+        </table>
+        <input class="btn btn-primary" type="submit" value="Confirm Booking">
+    </form>
+</div>
+{% endblock%}

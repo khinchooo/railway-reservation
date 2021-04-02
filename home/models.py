@@ -31,14 +31,11 @@ class RouteStation(models.Model):
     arrival_time = models.TimeField(null=True, blank=True)
 
 class Reservation(models.Model):
+    reservation_no = models.CharField(max_length=32, null=True, blank=True)
     train = models.ForeignKey('Train',on_delete=models.CASCADE)
     user = models.CharField(max_length=50)
-    reserve_no = models.IntegerField()
-    date = models.DateField(null=True, blank=True)
-    amount = models.IntegerField()
-    classes = models.CharField(max_length=50)
-    status = models.CharField(max_length=50)
-    pessanger_record = models.CharField(max_length=50)
+    journey_date = models.DateField(null=True, blank=True)
+    no_of_seats = models.CharField(max_length=50)
     start_station = models.CharField(max_length=50)
     end_station = models.CharField(max_length=50)
 

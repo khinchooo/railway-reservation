@@ -1,0 +1,54 @@
+{% extends 'booking/bases.html' %}
+
+{%block body%}
+<div class="container">
+    <h2>Train List</h2>
+    <form class="form-inline" action="/home/book" method="POST">
+        {%csrf_token%}
+        <div class="form-group">
+            <label>Start Station</label>
+            <input type="text" class="form-control" name="start_station" value="{{start_station}}" readonly>
+        </div>
+        <div class="form-group">
+            <label>End Station</label>
+            <input type="text" class="form-control" name="end_station" value="{{end_station}}" readonly>
+        </div>
+        <div class="form-group">
+            <label>Journey Date</label>
+            <input type="text" class="form-control" name="journey_date" placeholder="01/01/2021">
+        </div>
+        <hr/>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Train Number</th>
+                    <th>Train Name</th>
+                    <th>Start Station</th>
+                    <th>Departure Time</th>
+                    <th>Arrival Station</th>
+                    <th>Arrival Time</th>
+                    <th>No of Seats</th>
+                    <th>Book</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in data %}
+                <tr>
+                    <td>{{i.train.train_id}}</td>
+                    <td>{{i.train.train_name}}</td>
+                    <td>{{i.route.start_station}}</td>
+                    <td>{{i.departure_time}}</td>
+                    <td>{{i.route.end_station}}</td>
+                    <td>{{i.arrival_time}}</td>
+                    <td><input type="number" name="no_of_seats" class="form-control"></td>
+                    <td>
+                        <button type="submit" class="btn btn-primary">Book Seat</button>
+                        <input type="hidden" name="route_station_id" value="{{i.id}}">
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
+</div>
+{%endblock%}
