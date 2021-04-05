@@ -2,9 +2,9 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.template import loader
 from .models import Member
-from .forms import Search, Book, Booking, Cancel
-from home.models import RouteStation,Station,Route,Train,Reservation,Payment
-import json
+from .forms import Search, Book, Booking, Cancel, AddTrain, AddStation, AddRoute, AddRouteTrain
+from home.models import RouteStation,Station,Route,Train,Reservation
+# import json
 import uuid # Required for unique book instances
 
 # Create your views here.
@@ -99,3 +99,72 @@ def cancel(request):
         return render(request,'home/cancel.html',{'data':reservation_data})
     else:
         return render(request,'home/cancel.html',{'data':reservation_data})
+
+def addTrain(request):
+    if request.method == 'POST':
+        form = AddTrain(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            train = Train()
+            train.train_id = data['train_id']
+            train.train_name = data['train_name']
+            train.route_id = data['route_id']
+            train.save()
+            return redirect('/home')
+        else:
+            return HttpResponse('<h1>Invalid Data</h1>')
+    route = Route.objects.all()
+    return render(request,'booking/addTrain.html',{'tr':route})
+
+def addStation(request):
+    if request.method == 'POST':
+        form = AddStation(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            station = Station()
+            station.station_id = data['station_id']
+            station.station_name = data['station_name']
+            station.save()
+            return redirect('/home')
+        else:
+            return HttpResponse('<h1>Invalid Data</h1>')
+    return render(request, 'booking/addStation.html')
+
+def addRoute(request):
+    if request.method == 'POST':
+        form = AddRoute(request.POST)
+        if form.is_valid():
+            data=form.cleaned_data
+            route = Route()
+            route.route_id = data['route_id']
+            route.start_station = data['start_station']
+            route.end_station = data['end_station']
+            route.save()
+            return redirect('/home')
+        else:
+            return HttpResponse('<h1>Invalid Data</h1>')
+    station = Station.objects.all()
+    return render(request,'booking/addRoute.html',{'stn':station})
+
+def addRouteTrain(request):
+    if request.method == 'POST':
+        form = AddRouteTrain(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            routestation = RouteStation()
+            t1 = Train.objects.get(train_id = data['train_id'])
+            routestation.train_no = t1
+            s1=Station.objects.get(station_id = data['station_id'])
+            routestation.station_id = s1
+            r1 = Route.objects.get(route_id = data['route_id'])
+            routestation.route_id = r1
+            routestation.order = data['order']
+            routestation.arrival_time = data['arrival_time']
+            routestation.save()
+            return redirect('/home')
+        else:
+            return HttpResponse(form.errors)
+    route = Route.objects.all()
+    train = Train.objects.all()
+    station = Station.objects.all
+    return render(request, 'booking/addRouteTrain.html', {'rt': route,'tr':train,'st':station})
