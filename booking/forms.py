@@ -10,6 +10,8 @@ class Book(forms.Form):
     route_station_id = forms.IntegerField()
     no_of_seats = forms.IntegerField()
     journey_date = forms.DateField()
+    start_station = forms.CharField(max_length=50)
+    end_station = forms.CharField(max_length=50)
 
 class Booking(forms.Form):
     train_name = forms.CharField(max_length=50)
@@ -18,4 +20,7 @@ class Booking(forms.Form):
     end_station = forms.CharField(max_length=50)
     no_of_seats = forms.IntegerField()
     journey_date = forms.DateField()
+
+class Cancel(forms.Form):
+    reservation_id = forms.IntegerField()
     

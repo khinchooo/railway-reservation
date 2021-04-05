@@ -3,7 +3,7 @@
 {%block body%}
 <div class="container">
     <h2>Train List</h2>
-    <form class="form-inline" action="/home/book" method="POST">
+    <form class="form-inline" action="/home/book" method="POST" id="formDiv">
         {%csrf_token%}
         <div class="form-group">
             <label>Start Station</label>
@@ -15,40 +15,50 @@
         </div>
         <div class="form-group">
             <label>Journey Date</label>
-            <input type="text" class="form-control" name="journey_date" placeholder="01/01/2021">
+            <input type="date" class="form-control" name="journey_date" placeholder="01/12/2021">
         </div>
-        <hr/>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Train Number</th>
-                    <th>Train Name</th>
-                    <th>Start Station</th>
-                    <th>Departure Time</th>
-                    <th>Arrival Station</th>
-                    <th>Arrival Time</th>
-                    <th>No of Seats</th>
-                    <th>Book</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for i in data %}
-                <tr>
-                    <td>{{i.train.train_id}}</td>
-                    <td>{{i.train.train_name}}</td>
-                    <td>{{i.route.start_station}}</td>
-                    <td>{{i.departure_time}}</td>
-                    <td>{{i.route.end_station}}</td>
-                    <td>{{i.arrival_time}}</td>
-                    <td><input type="number" name="no_of_seats" class="form-control"></td>
-                    <td>
-                        <button type="submit" class="btn btn-primary">Book Seat</button>
-                        <input type="hidden" name="route_station_id" value="{{i.id}}">
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <input type="hidden" name="no_of_seats" id="no_of_seats">
+        <input type="hidden" name="route_station_id" id="route_station_id">
     </form>
+    <hr/>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Train Number</th>
+                <th>Train Name</th>
+                <th>Start Station</th>
+                <th>Departure Time</th>
+                <th>Arrival Station</th>
+                <th>Arrival Time</th>
+                <th>No of Seats</th>
+                <th>Book</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+                <td>{{i.train.train_id}}</td>
+                <td>{{i.train.train_name}}</td>
+                <td>{{i.route.start_station}}</td>
+                <td>{{i.departure_time}}</td>
+                <td>{{i.route.end_station}}</td>
+                <td>{{i.arrival_time}}</td>
+                <td><input type="number" name="no_of_seats_{{i.id}}" class="form-control"></td>
+                <td>
+                    <button type="button" class="btn btn-primary" onclick="formSubmit({{i.id}})">Book Seat</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <script>
+    function formSubmit(id) {
+        var no_of_seats = document.getElementsByName("no_of_seats_"+ id)[0].value;
+        document.getElementById("no_of_seats").value = no_of_seats;
+        document.getElementById("route_station_id").value = id;
+        document.getElementById("formDiv").submit();
+    }
+    </script>
 </div>
 {%endblock%}

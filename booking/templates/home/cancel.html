@@ -1,0 +1,45 @@
+{% extends 'booking/bases.html' %}
+
+{%block body%}
+<div class="container">
+    <h2>Train List</h2>
+    <form class="form-inline" action="/home/cancel" method="POST" id="formDiv">
+        {%csrf_token%}
+        <input type="hidden" name="reservation_id" id="reservation_id">
+    </form>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Train Number</th>
+                <th>Train Name</th>
+                <th>Start Station</th>
+                <th>End_Station</th>
+                <th>No of Seats</th>
+                <th>Journey Date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr>
+                <td>{{i.train.train_id}}</td>
+                <td>{{i.train.train_name}}</td>
+                <td>{{i.start_station}}</td>
+                <td>{{i.end_station}}</td>
+                <td>{{i.no_of_seats}}</td>                   
+                <td>{{i.journey_date}}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" onclick="formSubmit({{i.id}})">Cancel</button>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <script>
+    function formSubmit(id) {
+        document.getElementById("reservation_id").value = id;
+        document.getElementById("formDiv").submit();
+    }
+    </script>
+</div>
+{%endblock%}

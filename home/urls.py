@@ -10,4 +10,5 @@ urlpatterns = [
     path('trains', booking.views.getTrain),
     path('book', booking.views.book),
     path('reserve', booking.views.reserve),
+    path('cancel', booking.views.cancel),
 ]

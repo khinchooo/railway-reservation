@@ -2,7 +2,7 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.template import loader
 from .models import Member
-from .forms import Search, Book, Booking
+from .forms import Search, Book, Booking, Cancel
 from home.models import RouteStation,Station,Route,Train,Reservation,Payment
 import json
 import uuid # Required for unique book instances
@@ -73,7 +73,8 @@ def reserve(request):
             reservation = Reservation()
             reservation.reservation_no = reservation_no
             reservation.train_id = train_id
-            reservation.user = "USER"
+            reservation.user = request.user
+            print(request.user)
             reservation.journey_date = journey_date
             reservation.no_of_seats = no_of_seats
             reservation.start_station = start_station
@@ -83,3 +84,18 @@ def reserve(request):
             return HttpResponse('<h1>Invalid data</h1>')
         return render(request,'home/complete.html', { 'reservation_no': reservation_no })
     return HttpResponse('<h1>Wrong</h1>')
+
+def cancel(request):
+    reservation_data = Reservation.objects.filter(user = request.user)
+    if request.method=='POST':
+        form = Cancel(request.POST)
+        if form.is_valid():
+            post_data = form.cleaned_data
+            reservation_id = post_data['reservation_id']
+            data = Reservation.objects.filter(id = reservation_id)
+            data.delete()
+        else:
+            return HttpResponse('<h1>Invalid data</h1>')
+        return render(request,'home/cancel.html',{'data':reservation_data})
+    else:
+        return render(request,'home/cancel.html',{'data':reservation_data})
