@@ -152,13 +152,11 @@ def addRouteTrain(request):
         if form.is_valid():
             data = form.cleaned_data
             routestation = RouteStation()
-            t1 = Train.objects.get(train_id = data['train_id'])
-            routestation.train_no = t1
-            s1=Station.objects.get(station_id = data['station_id'])
-            routestation.station_id = s1
-            r1 = Route.objects.get(route_id = data['route_id'])
-            routestation.route_id = r1
+            routestation.train_id = data['train_id']
+            routestation.station_id = data['station_id']
+            routestation.route_id = data['route_id']
             routestation.order = data['order']
+            routestation.departure_time = data['departure_time']
             routestation.arrival_time = data['arrival_time']
             routestation.save()
             return redirect('/home')
