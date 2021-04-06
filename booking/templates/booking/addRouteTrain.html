@@ -10,7 +10,7 @@
         <option value="{{i.train_id}}">{{i.train_name}}</option>
         {%endfor%}
     </select>
-    Station Id:<select name="station_id">
+    Station ID:<select name="station_id">
         {%for i in st%}
         <option value="{{i.station_id}}">{{i.station_name}}</option>
         {%endfor%}
@@ -23,8 +23,6 @@
     Station ID:<input type="text" name="order">
     Departure Time:<input type="time" name="departure_time">
     Arrival Time:<input type="time" name="arrival_time">
-
-
     <input type="submit" class="btn btn-success" value = "Add RouteTrain>
 </form>
 {%endblock%}

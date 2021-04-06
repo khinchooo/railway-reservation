@@ -22,5 +22,27 @@ class Booking(forms.Form):
     journey_date = forms.DateField()
 
 class Cancel(forms.Form):
-    reservation_id = forms.IntegerField()
+    reservation_id = forms.IntegerField() 
+
+class AddTrain(forms.Form):
+    train_id = forms.CharField(max_length=50)
+    train_name = forms.CharField(max_length=50)
+    route_id = forms.CharField(max_length=50)
+
+class AddRoute(forms.Form):
+    route_id = forms.CharField(max_length=50)
+    start_station = forms.CharField(max_length=50)
+    end_station = forms.CharField(max_length=50)
+
+class AddStation(forms.Form):
+    station_id = forms.CharField(max_length=50)
+    station_name = forms.CharField(max_length=50)
+
+class AddRouteTrain(forms.Form):
+    train_id = forms.CharField(max_length=50)
+    station_id = forms.CharField(max_length=50)
+    route_id = forms.CharField(max_length=50)
+    order = forms.IntegerField()
+    departure_time = forms.TimeField()
+    arrival_time = forms.TimeField()
     
