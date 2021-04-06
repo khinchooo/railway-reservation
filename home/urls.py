@@ -11,4 +11,8 @@ urlpatterns = [
     path('book', booking.views.book),
     path('reserve', booking.views.reserve),
     path('cancel', booking.views.cancel),
+    path('addTrain/',booking.views.addTrain),
+    path('addStation/',booking.views.addStation),
+    path('addRoute/',booking.views.addRoute),
+    path('addRouteTrain/',booking.views.addRouteTrain),
 ]

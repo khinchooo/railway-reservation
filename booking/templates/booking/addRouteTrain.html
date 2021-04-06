@@ -1,0 +1,30 @@
+{% extends 'booking/bases.html'%}
+{% block body%}
+<h2 style="text-align:center;"><span class="sty" style="font-size:50px;color:black;">Add Route Station</span></h2>
+
+
+<form action="" method="post">
+    {%csrf_token%}
+    Select Train:<select name="train_id">
+        {%for i in tr%}
+        <option value="{{i.train_id}}">{{i.train_name}}</option>
+        {%endfor%}
+    </select>
+    Station Id:<select name="station_id">
+        {%for i in st%}
+        <option value="{{i.station_id}}">{{i.station_name}}</option>
+        {%endfor%}
+    </select>
+    Route ID:<select name="route_id">
+        {%for i in rt%}
+        <option value="{{i.route_id}}">{{i.start_station}}-{{i.end_station}}</option>
+        {%endfor%}
+    </select>
+    Station ID:<input type="text" name="order">
+    Departure Time:<input type="time" name="departure_time">
+    Arrival Time:<input type="time" name="arrival_time">
+
+
+    <input type="submit" class="btn btn-success" value = "Add RouteTrain>
+</form>
+{%endblock%}

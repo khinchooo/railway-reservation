@@ -17,7 +17,6 @@
         }
         .sty
         {
-            font-family: 'Dancing Script', cursive;
             color:white;
             margin-left:-19px;
         }
@@ -30,11 +29,11 @@
   <div class="container-fluid">
         <div class="row1 row">
             <div class="col-lg-4">
-                <span class="sty" style="font-size:35px;">Railway Reservation System</span>
+                <span class="sty" style="font-size:33px;">Railway Reservation Service</span>
             </div>
-            <div class="col-lg-6"></div>
+            <div class="col-lg-5"></div>
             <div class="col-lg-1"><span class="sty" style="font-size:18px;">Welcome:{{request.user}}</span></div>
-            <div class="col-lg-1"><a href="logout"><button class="btn btn-danger" style="margin-top:9px;">Log Out</button> </a></div>
+            <div class="col-lg-1"><a href="logout"><button class="btn btn-danger" style="margin-top:9px;margin-left:60px;">Log Out</button> </a></div>
         </div>
     <div class="container-fluid">
     <div class="row">
@@ -51,18 +50,21 @@
         <div class="form-group clearfix">
           <a href="addRoute"><button class="btn btn-secondary" style="width:100%">Add Route</button></a>
         </div>
+        <div class="form-group clearfix">
+          <a href="addRouteTrain"><button class="btn btn-primary" style="width:100%">Add RouteTrain</button></a>
+        </div>
         {% endif %}
         <div class="form-group clearfix">
           <a href="search"><button class="btn btn-primary" style="width:100%">Book Trains</button></a>
         </div>
-        <div class="form-group clearfix">
+        {% comment %} <div class="form-group clearfix">
           <a href="schedule"><button class="btn btn-info" style="width:100%">Check Schedule</button></a>
-        </div>
+        </div> {% endcomment %}
         <div class="form-group clearfix">
           <a href="cancel"><button class="btn btn-warning" style="width:100%">Cancel Seat</button></a>
         </div>
         </div>
-        <div style="margin-left:200px;margin-top:-170px;">
+        <div style="margin-left:200px;margin-top:-120px;">
          <img src="{% static 'images/title.jpg' %}" alt="title">
         </div>
       </div>

@@ -1,0 +1,21 @@
+{% extends 'booking/bases.html'%}
+{% block body%}
+<h2 style="text-align:center;"><span class="sty" style="font-size:50px;color:black;">Add Routes</span></h2>
+
+
+<form action="" method="post">
+    {%csrf_token%}
+    Route ID:<input type="text" name="route_id">
+    Departure Station:<select name="start_station">
+        {%for i in stn%}
+        <option value="{{i.station_id}}">{{i.station_name}}</option>
+        {%endfor%}
+    </select>
+    Arrival Station:<select name="end_station">
+        {%for i in stn%}
+        <option value="{{i.station_id}}">{{i.station_name}}</option>
+        {%endfor%}
+    </select>
+    <input type="submit" class="btn btn-success" value = "Add Route">
+</form>
+{%endblock%}

@@ -4,5 +4,6 @@
 <div class="container">
     <h2>Your Booking is completed.</h2>
     <p>Your booking no is <strong>{{ reservation_no }}</strong></p>
+    <a href="{%url 'home:booking'%}"><button class="btn btn-success">Back To Homepage</button></a>
 </div>
 {% endblock%}

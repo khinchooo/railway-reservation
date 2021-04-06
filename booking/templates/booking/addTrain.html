@@ -1,0 +1,17 @@
+{% extends 'booking/bases.html'%}
+{% block body%}
+<h2 style="text-align:center;"><span class="sty" style="font-size:50px;color:black;">Add Train</span></h2>
+
+
+<form action="" method="post">
+    {%csrf_token%}
+    Train Name:<input type="text" name="train_id">
+    Train Name:<input type="text" name="train_name">
+    Select Route:<select name="route_id">
+    {%for i in tr%}
+        <option value="{{i.route_id}}">{{i.start_station}}-{{i.end_station}}</option>
+    {%endfor%}
+</select>
+    <input type="submit" class="btn btn-success" value = "Add Train">
+</form>
+{%endblock%}
