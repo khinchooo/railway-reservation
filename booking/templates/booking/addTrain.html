@@ -1,17 +1,35 @@
 {% extends 'booking/bases.html'%}
 {% block body%}
-<h2 style="text-align:center;"><span class="sty" style="font-size:50px;color:black;">Add Train</span></h2>
+<h2 class="text-center">Add Train</h2>
 
-
-<form action="" method="post">
-    {%csrf_token%}
-    Train Name:<input type="text" name="train_id">
-    Train Name:<input type="text" name="train_name">
-    Select Route:<select name="route_id">
+<form action="" method="post" class="col-md-4 col-md-offset-4">
+  {%csrf_token%}
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label">Train ID:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" name="train_id">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label">Train Name:</label>
+    <div class="col-sm-6">
+      <input type="text" class="form-control" name="train_name">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label">Select Route:</label>
+    <div class="col-sm-6">
+    <select class="form-control col-lg-12" name="route_id">
     {%for i in tr%}
         <option value="{{i.route_id}}">{{i.start_station}}-{{i.end_station}}</option>
     {%endfor%}
-</select>
-    <input type="submit" class="btn btn-success" value = "Add Train">
+    </select>
+    </div>
+  </div>
+  <div class="form-row text-center">
+    <div class="col-12">
+        <button type="submit" class="btn btn-success">Add Train</button>
+    </div>
+ </div>
 </form>
 {%endblock%}

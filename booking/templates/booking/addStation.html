@@ -1,12 +1,26 @@
 {% extends 'booking/bases.html'%}
 {% block body%}
-<h2 style="text-align:center;"><span class="sty" style="font-size:50px;color:black;">Add Stations</span></h2>
+<h2 class="text-center">Add Stations</h2>
 
 
-<form action="" method="post">
+<form action="" method="post" class="col-md-4 col-md-offset-4">
     {%csrf_token%}
-    Station ID:<input type="text" name="station_id">
-    Station Name:<input type="text" name="station_name">
-    <input type="submit" class="btn btn-success" value = "Add Station">
+    <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Station ID:</label>
+    <div class="col-sm-6">
+        <input type="text" class="form-control" name="station_id">
+    </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-sm-4 col-form-label">Station Name:</label>
+    <div class="col-sm-6">
+        <input type="text" class="form-control" name="station_name">
+    </div>
+    </div>
+    <div class="form-row text-center">
+    <div class="col-12">
+        <input type="submit" class="btn btn-success" value = "Add Station">
+    </div>
+    </div>
 </form>
 {%endblock%}
