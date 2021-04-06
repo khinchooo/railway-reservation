@@ -38,11 +38,3 @@ class Reservation(models.Model):
     no_of_seats = models.CharField(max_length=50)
     start_station = models.CharField(max_length=50)
     end_station = models.CharField(max_length=50)
-
-class Payment(models.Model):
-    pessanger_record = models.CharField(max_length=50)
-    user = models.CharField(max_length=50)
-    amount = models.IntegerField()
-    payment = models.CharField(max_length=50)
-    payment_date = models.DateField(null=True, blank=True)
-    cancel = models.CharField(max_length=50)
